@@ -84,6 +84,7 @@ module.exports = {
     formatter: require('eslint-friendly-formatter')
   },
   vue: {
+    //引入了一系列的css loader
     loaders: utils.cssLoaders({ sourceMap: useCssSourceMap }),
     postcss: [
       require('autoprefixer')({

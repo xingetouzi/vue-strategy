@@ -66,5 +66,6 @@ module.exports = app.listen(port, function (err) {
   }
   var uri = 'http://localhost:' + port
   console.log('Listening at ' + uri + '\n')
-  opn(uri)
+  //不需要启动后自动打开网页，好烦。
+  // opn(uri)
 })
