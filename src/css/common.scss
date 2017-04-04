@@ -1,6 +1,4 @@
-$font-color: #34495e;
-$primary-color: #4AAFC1;
-$menu-bg: #eff2f7;
+@import "variable";
 
 html, body {
   height: 100%;
@@ -16,51 +14,6 @@ body {
 #app {
   height: 100%;
   min-width: 1000px;
-}
-
-.header {
-  height: 65px;
-  overflow: hidden;
-  background-color: $primary-color;
-  padding: 0 15px;
-  .nav-left{
-    height: 100%;
-    float: left;
-  }
-  .nav-logo, .nav-title {
-    display: table-cell;
-    height: 65px;
-    color: white;
-    vertical-align: middle;
-  }
-  .nav-logo {
-    img {
-      height: 32px;
-      width: 136px;
-    }
-  }
-  .nav-title {
-    font-size: 20px;
-  }
-  > ul{
-    list-style: none;
-    float: right;
-    margin: 0;
-    padding: 0;
-    color: white;
-  }
-  .nav-setting{
-    height: 100%;
-    >li{
-      height: 100%;
-      line-height: 65px;
-      padding: 0 10px;
-    }
-    >li:hover{
-      background-color: darken($primary-color,10%);
-      cursor: pointer;
-    }
-  }
 }
 
 .left-menu {
