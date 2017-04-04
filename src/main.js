@@ -2,10 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 var VueResource = require('vue-resource')
 import Element from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
+import '../theme/index.css'
 import Home from './js/home/home.vue'
-import header from './components/header.vue';
-import leftMenu from './components/leftMenu.vue';
+import header from './components/header.vue'
+import leftMenu from './components/leftMenu.vue'
 import './css/common.scss'
 import './css/normalize.css'
 
