@@ -5,6 +5,6 @@ import Request from './Request';
 
 let login = params => Request('/business/login').data(params).post();
 let logout = params => Request('business/logout').data(params).post();
-let purchase_bill = params => Request('business/purchase/bill').data(params).get();
+let purchase_bill = params => Request('business/purchase/bill/').data(params).get();
 
 export {login, logout, purchase_bill};

@@ -43,8 +43,7 @@ var processResponse = function (promise, url, sucCode, config) {
       return res.json();
     } else {
       //后台出现错误,直接报错。
-      notification.error({message: '', description: "服务器忙,请稍后重试", duration: 3});
-      //Tip.danger({children: "服务器忙,请稍后重试"});
+      console.error("服务器忙,请稍后重试");
       return Promise.reject('服务器错误:' + res.status + res.statusText, res);
     }
   }).then((rsp) => {
@@ -55,6 +54,7 @@ var processResponse = function (promise, url, sucCode, config) {
     }
     //处理状态码
     if (rsp.code === 302) {
+      console.log('请求被重定向。');
       return Promise.reject(rsp.message || '未知错误');
     } else if (rsp.code === 200) {
       return rsp;

@@ -22,13 +22,12 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/business': {
+      '^/business/**': {
         target: 'http://120.76.243.226',
-        pathRewrite: {
-          '^/business': '/business'
-        },
-        secure: false,
-        changeOrigin: true
+        // pathRewrite: {'^/business/' : '/business/'},
+        // secure: false,
+        changeOrigin: true,
+        logLevel:'debug'
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
