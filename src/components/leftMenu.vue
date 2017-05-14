@@ -14,13 +14,13 @@
 
 <script>
     export default{
-        data(){
-            return{
-                msg:'hello vue'
-            }
-        },
-        components:{
+      data () {
+        return {
+          msg: 'hello vue'
         }
+      },
+      components: {
+      }
     }
 
 </script>

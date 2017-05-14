@@ -5,11 +5,19 @@ module.exports = {
     sourceType: 'module'
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
-  // extends: 'standard',
+  extends: 'standard',
   // required to lint *.vue files
   plugins: [
     'html'
   ],
+  "globals": {
+    "var1": true,
+    "var2": false
+  },
+  "globals": {
+    "Public": true,
+    "fetch":false
+  },
   // add your custom rules here
   'rules': {
     // allow paren-less arrow functions
