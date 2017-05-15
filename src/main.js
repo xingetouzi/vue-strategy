@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // let VueResource = require('vue-resource')
 import routes from './router'
-import store from './store/'
+import store from './store/index'
 import Element from 'element-ui'
 import '../theme/index.css'
 import './css/common.scss'

@@ -11,7 +11,6 @@
   export default{
     mounted () { // 挂载后执行
       this.initData()
-      this.initData()
     },
     methods: {
       async initData () {

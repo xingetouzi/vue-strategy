@@ -5,6 +5,7 @@ import {GET_USERINFO} from './mutation_type'
 
 export default {
   // 获取用户信息存入vuex
+  // 我们可以使用 ES2015 风格的计算属性命名功能来使用一个常量作为函数名
   [GET_USERINFO] (state, info) {
     if (state.userInfo && (state.userInfo.username !== info.username)) {
       return
