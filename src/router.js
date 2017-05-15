@@ -9,7 +9,7 @@ const Console = r => require.ensure([], () => r(require('./page/console/index'))
 const Order = r => require.ensure([], () => r(require('./page/order/index')), 'order')
 const Shop = r => require.ensure([], () => r(require('./page/shop/index')), 'shop')
 
-export default [{
+const routes = [{
   path: '/',
   component: App, // 顶层路由，对应index.html
   children: [ // 二级路由。对应App.vue
@@ -35,3 +35,5 @@ export default [{
     }
   ]
 }]
+
+export default routes
