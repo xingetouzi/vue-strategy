@@ -12,11 +12,20 @@ import 'whatwg-fetch'
 import fetchJsonp from 'fetch-jsonp'
 import {MessageBox, Message} from 'element-ui'
 
-function sysError (message) {
+function sysError(message) {
   message && Message({
     showClose: true,
     message: message,
     type: 'error'
+  })
+}
+
+function RedirectToLogin() {
+  MessageBox.alert('请先登录', '登录', {
+    confirmButtonText: '登录',
+    callback: action => {
+      window.location.href = '#/login'
+    }
   })
 }
 
@@ -63,15 +72,7 @@ var processResponse = function (promise, url, sucCode, config) {
     // 处理状态码
     if (rsp.code === 401) {
       console.log('请先登录')
-      MessageBox.alert('请先登录', '登录', {
-        confirmButtonText: '登录',
-        callback: action => {
-          this.$message({
-            type: 'info',
-            message: `action: ${action}`
-          })
-        }
-      })
+      RedirectToLogin()
       return Promise.reject(new Error(rsp.message || '未知错误'))
     } else if (rsp.code === 200) {
       sysError(rsp.message)

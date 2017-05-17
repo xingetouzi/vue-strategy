@@ -15,11 +15,24 @@
   import {mapState} from 'vuex'
   import headTop from './components/header'
   import leftMenu from './components/leftMenu.vue'
-  console.log(headTop)
   export default {
+    data(){
+      return {
+        isLogin: true
+      }
+    },
     components: {
       headTop,
       leftMenu
+    },
+    mounted(){
+      this.test()
+      this.isLogin = this.userInfo.isLogin
+    },
+    methods: {
+      test(){
+        console.log(this.userInfo)
+      }
     },
     computed: {
       ...mapState([

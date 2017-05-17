@@ -20,18 +20,20 @@ body {
 }
 
 .left-menu {
-  display: inline-block;
+  display: block;
+  float: left;
   margin-top: 5px;
+  margin-right: 10px;
   width: 200px;
   height: calc(100% - 70px);
   background-color: $menu-bg;
 }
 
 .main {
-  display: inline-block;
+  display: block;
+  overflow: hidden;
   vertical-align: top;
   margin-top: 5px;
   background-color: $menu-bg;
-  width: calc(100% - 205px);
   height: calc(100% - 70px);
 }

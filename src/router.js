@@ -3,6 +3,7 @@
  */
 import App from './App.vue'
 
+const Login = r => require.ensure([], () => r(require('./page/login/index')), 'login')
 const Home = r => require.ensure([], () => r(require('./page/home/index')), 'home')
 const Bill = r => require.ensure([], () => r(require('./page/bill/index')), 'bill')
 const Console = r => require.ensure([], () => r(require('./page/console/index')), 'console')
@@ -16,10 +17,12 @@ const routes = [{
     {
       path: '',
       redirect: '/home'
-    },
-    {
+    }, {
       path: '/home',
       component: Home
+    }, {
+      path: '/login',
+      component: Login
     }, {
       path: '/bill',
       component: Bill
