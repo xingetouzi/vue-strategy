@@ -1,7 +1,7 @@
 <template>
   <div>
     <head-top></head-top>
-    <left-menu></left-menu>
+    <left-menu v-if = "isLogin"></left-menu>
     <div class="main">
       <router-view class="view"></router-view>
     </div>
