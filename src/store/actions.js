@@ -1,13 +1,13 @@
 /**
  * Created by spider on 5/14/17.
  */
-import {login} from '../service/getData'
-import {GET_USERINFO} from './mutations'
+// import {login} from '../service/getData'
+import {SET_USERINFO} from './mutation_type'
 
 export default {
-
-  async login ({commit, state}) {
-    let res = await login({})
-    commit(GET_USERINFO, res)
+  async setUserInfo({commit, state}, info) {
+    // let res = await login({})
+    console.log(info, typeof SET_USERINFO)
+    commit(SET_USERINFO, info)
   }
 }

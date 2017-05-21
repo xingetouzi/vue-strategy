@@ -3,4 +3,3 @@
  */
 export const GET_USERINFO = 'GET_USERINFO'
 export const SET_USERINFO = 'SET_USERINFO'// 登录成功或登录失败
-
