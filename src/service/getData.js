@@ -3,8 +3,8 @@
  */
 import Request from './Request'
 
-let login = params => Request('/business/login/').data(params).post()
-let logout = params => Request('business/logout/').data(Object.assign({}, params, {code: -2})).post()
+let login = params => Request('/business/login/').data(Object.assign({}, params, {code: -2})).post()
+let logout = params => Request('business/logout/').data(params).post()
 let purchaseBill = params => Request('business/purchase/bill/').data(params).get()
 
 export {login, logout, purchaseBill}

@@ -1,7 +1,7 @@
 /**
  * Created by spider on 5/14/17.
  */
-import {GET_USERINFO, SET_USERINFO} from './mutation_type'
+import {GET_USERINFO, SET_USERINFO, LOGOUT} from './mutation_type'
 
 export default {
   // 获取用户信息存入vuex
@@ -15,5 +15,10 @@ export default {
     state.userInfo = {}
     state.userInfo.isLogin = true
     state.userInfo.userName = info.userName
+  },
+  [LOGOUT] (state, info) {
+    state.userInfo = {}
+    state.userInfo.isLogin = false
+    state.userInfo.userName = ''
   }
 }

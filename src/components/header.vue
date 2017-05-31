@@ -18,7 +18,7 @@
 </template>
 
 <script type="text/babel">
-  import {mapState} from 'vuex'
+  import {mapState, mapActions} from 'vuex'
   export default{
     data () {
       return {}
@@ -27,8 +27,12 @@
       'userInfo'
     ]),
     methods: {
+      ...mapActions([
+        'logout' // 映射 this.increment() 为 this.$store.dispatch('increment')
+      ]),
       logout(){
         console.log('logout')
+        this.logout()
       }
     }
   }
@@ -83,7 +87,7 @@
         background-color: darken($primary-color, 10%);
         cursor: pointer;
       }
-      .header-name{
+      .header-name {
         display: inline-block;
         color: white;
       }

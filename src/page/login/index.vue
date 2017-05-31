@@ -60,9 +60,10 @@
         this.$refs[formName].validate(async(valid) => {
           if (valid) {
             let res = await login(this.loginForm)
+            console.log(res)
             if (res.data.success === 1) {
               console.log(res, '登录成功！')
-              window.location.href = '/home'
+              window.location.href = '#/home'
             }
           } else {
             console.log('error submit!!')

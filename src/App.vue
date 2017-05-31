@@ -26,7 +26,6 @@
       leftMenu
     },
     mounted(){
-      this.test()
       this.isLogin = this.userInfo.isLogin
     },
     methods: {
@@ -35,13 +34,7 @@
       ]),
       ...mapActions([
         'setUserInfo' // 映射 this.increment() 为 this.$store.dispatch('increment')
-      ]),
-      test(){
-        console.log(this.userInfo)
-        this.SET_USERINFO({userName: '测试'})
-        setTimeout(() => this.setUserInfo({userName: '测试'}), 2000)
-        console.log(this.userInfo)
-      }
+      ])
     },
     computed: {
       ...mapState([
