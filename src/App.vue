@@ -7,8 +7,10 @@
     </div>
   </div>
 </template>
-<style>
-
+<style lang="scss">
+  .main{
+    padding: 20px 20px;
+  }
 </style>
 
 <script type="text/babel">
@@ -17,16 +19,12 @@
   import leftMenu from './components/leftMenu.vue'
   export default {
     data(){
-      return {
-        isLogin: true
-      }
     },
     components: {
       headTop,
       leftMenu
     },
     mounted(){
-      this.isLogin = this.userInfo.isLogin
     },
     methods: {
       ...mapMutations([

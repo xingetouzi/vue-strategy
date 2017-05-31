@@ -36,4 +36,24 @@ body {
   margin-top: 5px;
   background-color: $menu-bg;
   height: calc(100% - 70px);
+  box-sizing: border-box;
+}
+
+.common-header {
+  .common-header-search .el-input {
+    width: 300px
+  }
+  .common-header-import-button {
+    text-align: right;
+  }
+}
+
+.block-20{
+  height: 20px;
+}
+.space-10{
+  margin: 0 5px;
+}
+.tlr{
+  text-align: right;
 }
