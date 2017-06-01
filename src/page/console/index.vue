@@ -18,7 +18,7 @@
           </el-col>
           <el-col :span="12">
             <div class="grid-content bg-purple-light common-header-import-button">
-              <el-button type="primary" @click="onImport()">批量导入</el-button>
+              <el-button type="primary" @click="onAdd()">添加策略</el-button>
             </div>
           </el-col>
         </el-col>
@@ -29,9 +29,16 @@
 <style>
 
 </style>
-<script>
-    export default{
-
+<script type="text/babel">
+  export default{
+    methods: {
+      onAdd(){
+        console.log('onAdd')
+      },
+      onSearch(){
+        console.log('onSearch')
+      }
     }
+  }
 
 </script>

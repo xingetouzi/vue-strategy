@@ -18,7 +18,7 @@
           </el-col>
           <el-col :span="12">
             <div class="grid-content bg-purple-light common-header-import-button">
-              <el-button type="primary" @click="onImport()">批量导入</el-button>
+              <el-button type="primary" @click="onAdd()">添加策略</el-button>
             </div>
           </el-col>
         </el-col>
@@ -70,6 +70,18 @@
         </el-col>
       </el-row>
     </div>
+    <h1>{{isAddDialogShow}}</h1>
+    <el-dialog title="收货地址" :visible.sync="isAddDialogShow">
+      <el-form :model="form">
+        <el-form-item label="活动名称" :label-width="formLabelWidth">
+          <el-input v-model="form.strategy" auto-complete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="isAddDialogShow = false">取 消</el-button>
+        <el-button type="primary" @click="isAddDialogShow = true">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <style lang="scss">
@@ -79,7 +91,11 @@
   export default{
     data(){
       return {
-        tableData: []
+        tableData: [],
+        isAddDialogShow: false,
+        form: {
+          strategy: ''
+        }
       }
     },
     mounted () { // 挂载后执行
@@ -94,10 +110,11 @@
         }
       },
       onSearch(){
-        console.log('search')
+        console.log('onSearch')
       },
-      onImport(){
-        console.log('import')
+      onAdd(){
+        console.log('onAdd')
+        this.isAddDialogShow = true
       }
     }
   }
