@@ -16,7 +16,7 @@ const routes = [{
   children: [ // 二级路由。对应App.vue
     {
       path: '',
-      redirect: '/home'
+      redirect: '/shop'
     }, {
       path: '/home',
       component: Home

@@ -12,13 +12,9 @@ export default {
     }
   },
   [SET_USERINFO] (state, info) {
-    state.userInfo = {}
-    state.userInfo.isLogin = true
-    state.userInfo.userName = info.userName
+    state.userInfo = Object.assign(state.userInfo, {isLogin: true}, info)
   },
   [LOGOUT] (state, info) {
-    state.userInfo = {}
-    state.userInfo.isLogin = false
-    state.userInfo.userName = ''
+    state.userInfo = Object.assign(state.userInfo, {isLogin: false}, info)
   }
 }

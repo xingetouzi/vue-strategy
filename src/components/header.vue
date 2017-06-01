@@ -10,7 +10,7 @@
     <!--<div class="nav-title">策略选购平台</div>-->
     <div class="nav-setting">
       <ul>
-        <li v-if="userInfo.isLogin" @click='logout'>登出</li>
+        <li v-if="userInfo.isLogin" @click='onLogout()'>登出</li>
       </ul>
       <div class="header-name">{{userInfo.userName}}</div>
     </div>
@@ -30,9 +30,9 @@
       ...mapActions([
         'logout' // 映射 this.increment() 为 this.$store.dispatch('increment')
       ]),
-      logout(){
-        console.log('logout')
+      onLogout(){
         this.logout()
+        this.$router.push('shop')
       }
     }
   }

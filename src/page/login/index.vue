@@ -46,6 +46,7 @@
 
 <script type="text/babel">
   import {login} from '../../service/getData'
+  import {mapMutations} from 'vuex'
   export default {
     data() {
       return {
@@ -56,14 +57,15 @@
       }
     },
     methods: {
+      ...mapMutations(['SET_USERINFO']),
       submit(formName) {
         this.$refs[formName].validate(async(valid) => {
           if (valid) {
             let res = await login(this.loginForm)
             console.log(res)
             if (res.data.success === 1) {
-              console.log(res, '登录成功！')
-              window.location.href = '#/home'
+              this.SET_USERINFO({userName: res.message})
+              this.$router.push('shop')
             }
           } else {
             console.log('error submit!!')
