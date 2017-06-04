@@ -5,6 +5,7 @@ import Request from './Request'
 
 let login = params => Request('/business/login/').data(Object.assign({}, params, {code: -2})).post()
 let logout = params => Request('business/logout/').data(params).post()
-let purchaseBill = params => Request('business/purchase/bill/').data(params).get()
+let getPurchaseBill = params => Request('business/purchase/bill/').data(params).get()
+let addPurchaseBill = params => Request('business/purchase/bill/').data(params).post()
 
-export {login, logout, purchaseBill}
+export {login, logout, getPurchaseBill, addPurchaseBill}

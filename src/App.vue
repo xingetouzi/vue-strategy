@@ -19,6 +19,7 @@
   import leftMenu from './components/leftMenu.vue'
   export default {
     data(){
+      return {}
     },
     components: {
       headTop,

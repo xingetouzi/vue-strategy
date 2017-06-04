@@ -12,13 +12,13 @@
         <el-col :span="24">
           <el-col :span="12">
             <div class="grid-content bg-purple common-header-search">
-              <el-input v-model="input" placeholder="请输入策略ID/名称"></el-input>
+              <el-input v-model="searchText" placeholder="请输入策略ID/名称"></el-input>
               <el-button @click="onSearch()">搜索</el-button>
             </div>
           </el-col>
           <el-col :span="12">
             <div class="grid-content bg-purple-light common-header-import-button">
-              <el-button type="primary" @click="onAdd()">添加策略</el-button>
+              <el-button type="primary" @click="isAddDialogShow = true">添加策略</el-button>
             </div>
           </el-col>
         </el-col>
@@ -70,16 +70,19 @@
         </el-col>
       </el-row>
     </div>
-    <h1>{{isAddDialogShow}}</h1>
     <el-dialog title="收货地址" :visible.sync="isAddDialogShow">
-      <el-form :model="form">
-        <el-form-item label="活动名称" :label-width="formLabelWidth">
-          <el-input v-model="form.strategy" auto-complete="off"></el-input>
+      <el-form :model="strategyAddForm">
+        <el-form-item label="策略名称：">
+          <el-input v-model="strategyAddForm.strategyText"
+                    auto-complete="off"
+                    placeholder="请输入策略ID/名称，多个策略请以逗号隔开"
+                    :rules="[{ required: true, message: '策略名称不能为空'}]"
+          />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="isAddDialogShow = false">取 消</el-button>
-        <el-button type="primary" @click="isAddDialogShow = true">确 定</el-button>
+        <el-button type="primary" @click="onDialogConfirm">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -87,14 +90,15 @@
 <style lang="scss">
 </style>
 <script type="text/babel">
-  import {purchaseBill} from '../../service/getData'
+  import {getPurchaseBill, addPurchaseBill} from '../../service/getData'
   export default{
     data(){
       return {
         tableData: [],
         isAddDialogShow: false,
-        form: {
-          strategy: ''
+        searchText: '',
+        strategyAddForm: {
+          strategyText: ''
         }
       }
     },
@@ -104,17 +108,26 @@
     computed: {},
     methods: {
       async initData () {
-        let res = await purchaseBill({'tsFilter': 0, 'bsFilter': 0})
+        let res = await getPurchaseBill({'tsFilter': 0, 'bsFilter': 0})
         if (res.code === 200) {
           this.tableData = res.data
         }
       },
       onSearch(){
-        console.log('onSearch')
+        console.log('onSearch', this.searchText)
       },
-      onAdd(){
-        console.log('onAdd')
-        this.isAddDialogShow = true
+      async onDialogConfirm(){
+        let strategy = this.strategyAddForm.strategyText.split('，')
+        console.log('onDialogConfirm', strategy)
+        let res = await addPurchaseBill({strategy})
+        if (res.code === 200) {
+          this.isAddDialogShow = false
+          this.strategyAddForm.strategyText = ''
+          let res = await getPurchaseBill({'tsFilter': 0, 'bsFilter': 0})
+          if (res.code === 200) {
+            this.tableData = res.data
+          }
+        }
       }
     }
   }
