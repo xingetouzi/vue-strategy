@@ -10,18 +10,21 @@
       <div class="block-20"></div>
       <el-row>
         <el-col :span="24">
-          <el-col :span="12">
+          <el-col :span="10">
             <div class="grid-content bg-purple common-header-search">
               <el-input v-model="searchText" placeholder="请输入策略ID/名称"></el-input>
               <el-button @click="onSearch()">搜索</el-button>
-              <el-button type="primary" @click="isAddDialogShow = true">添加策略</el-button>
             </div>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="14">
             <div class="grid-content bg-purple-light common-header-import-button">
-              <el-button>购买选中</el-button>
-              <el-button type="info" @click="onTryClick()">试用选中</el-button>
-              <el-button type="danger" @click="onDeleteClick()">删除选中</el-button>
+              <el-button v-if="multipleSelection.length === 0" type="primary" @click="isAddDialogShow = true">添加策略
+              </el-button>
+              <span v-if="multipleSelection.length > 0">
+                <el-button @click = "onPurchaseClick()">购买选中</el-button>
+                <el-button type="info" @click="onTryClick()">试用选中</el-button>
+                <el-button type="danger" @click="onDeleteClick()">删除选中</el-button>
+              </span>
             </div>
           </el-col>
         </el-col>
@@ -70,12 +73,8 @@
               >
             </el-table-column>
           </el-table>
-        </el-col>
-      </el-row>
-      <div class="block-20"></div>
-      <el-row>
-        <el-col :span="24" class="tlr">
-          <span>已选择 <span :style="{color:'red'}">{{multipleSelection.length}}</span> 条记录</span>
+          <div class="block-20"></div>
+          <div class="shop-selected-text">已选择 <span>{{multipleSelection.length}}</span> 条记录</div>
         </el-col>
       </el-row>
     </div>
@@ -97,6 +96,12 @@
   </div>
 </template>
 <style lang="scss">
+  .shop-selected-text{
+    line-height: 36px;
+    > span{
+      color: red;
+    }
+  }
 </style>
 <script type="text/babel">
   import {getPurchaseBill, addPurchaseBill} from '../../service/getData'
@@ -139,6 +144,9 @@
             this.tableData = res.data
           }
         }
+      },
+      onPurchaseClick(){
+        console.log('onPurchaseClick')
       },
       onTryClick(){
         console.log('onTryClick')
