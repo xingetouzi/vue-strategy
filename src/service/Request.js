@@ -61,6 +61,7 @@ var processResponse = function (promise, url, sucCode, config) {
     } else {
       // 后台出现错误,直接报错。
       console.error('服务器忙,请稍后重试')
+      sysError('服务器错误:' + res.status + res.statusText)
       return Promise.reject(new Error('服务器错误:' + res.status + res.statusText, res))
     }
   }).then((rsp) => {
