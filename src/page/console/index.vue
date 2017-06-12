@@ -19,7 +19,7 @@
           <el-col :span="14">
             <div class="grid-content bg-purple-light common-header-import-button">
               <span v-if="multipleSelection.length > 0">
-                <el-button @click = "onStartClick()">启用选中</el-button>
+                <el-button @click="onStartClick()">启用选中</el-button>
                 <el-button type="success" @click="onContinueClick()">一键续费</el-button>
                 <el-button type="info" @click="onStopClick()">停止选中</el-button>
                 <el-button type="danger" @click="onRemoveClick()">移除选中</el-button>
@@ -44,28 +44,36 @@
             <el-table-column
                     prop="identity"
                     label="策略ID"
-                    width="200"
+                    width="150"
             >
             </el-table-column>
             <el-table-column
                     prop="name"
                     label="策略名称"
-                    width="200"
+                    width="150"
             >
             </el-table-column>
             <el-table-column
                     prop="runningStatus"
-                    label="状态"
-                    :filters="[{ text: '全部', value: '0' }, { text: '启用中', value: '1' },{ text: '已停止', value: '2' }]"
-                    :filter-method="filterTrialExpired"
-                    filter-placement="bottom-start">
-              >
+                    label="运行状态"
+                    :filters="[{ text: '已停止', value: '0' },{ text: '启用中', value: '1' }]"
+                    :filter-method="filterRunningStatus"
+                    filter-placement="bottom-start"
+                    :formatter="formatterRunningStatus"
+            >
+            </el-table-column>
+            <el-table-column
+                    prop="expiringStatus"
+                    label="购买状态"
+                    :filters="[{ text: '可使用', value: '1' }, { text: '试用中', value: '2' },{ text: '即将到期', value: '3' },{ text: '已经到期', value: '4' }]"
+                    :filter-method="filterExpiringStatus"
+                    filter-placement="bottom-start"
+                    :formatter="formatterExpiringStatus"
+            >
             </el-table-column>
             <el-table-column
                     prop="expiredTime"
                     label="到期时间"
-                    :filters="[{ text: '可使用', value: '1' }, { text: '试用中', value: '2' },{ text: '即将到期', value: '3' },{ text: '已经到期', value: '4' }]"
-                    :filter-method="filterBuyingExpired"
                     filter-placement="bottom-start">
               >
             </el-table-column>
@@ -81,7 +89,8 @@
 
 </style>
 <script type="text/babel">
-  import {getPurchaseDeal} from '../../service/getData'
+  import {getPurchaseDeal, deletePurchaseDeal, stopPurchaseDeal, startPurchaseDeal} from '../../service/getData'
+  import {runningStatusMap, expiringStatusMap} from '../common'
   export default{
     data(){
       return {
@@ -104,11 +113,11 @@
           this.tableData = res.data
         }
       },
-      filterTrialExpired(){
-
+      filterExpiringStatus(value, row){
+        return row.expiringStatus + '' === value
       },
-      filterBuyingExpired(){
-
+      filterRunningStatus(value, row){
+        return row.runningStatus + '' === value
       },
       handleSelectionChange(val) {
         this.multipleSelection = val
@@ -116,12 +125,53 @@
       },
       onStartClick(){
         console.log('onStartClick')
+        let strategies = this.multipleSelection.map((item) => item.identity)
+        this.$confirm(`是否确认启用策略${strategies.join(',')}？`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(async() => {
+          let strategies = this.multipleSelection.map((item) => item.identity)
+          console.log(strategies)
+          let res = await startPurchaseDeal({strategies})
+          if (res.code === 200) {
+            this.$message({
+              type: 'success',
+              message: `启用策略${strategies.join(',')}成功！`
+            })
+            this.initData()
+          }
+        }).catch(() => {
+
+        })
       },
       onStopClick(){
         console.log('onStopClick')
+        let strategies = this.multipleSelection.map((item) => item.identity)
+        this.$confirm(`是否确认停止策略${strategies.join(',')}？`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(async() => {
+          let strategies = this.multipleSelection.map((item) => item.identity)
+          console.log(strategies)
+          let res = await stopPurchaseDeal({strategies})
+          if (res.code === 200) {
+            this.$message({
+              type: 'success',
+              message: `停止策略${strategies.join(',')}成功！`
+            })
+            this.initData()
+          }
+        }).catch(() => {
+
+        })
+      },
+      onSearch(){
+        console.log('onSearch')
       },
       onContinueClick(){
-        console.log('onContinueClick')
+        console.log('onContinueClick,跳转到下单页')
       },
       onRemoveClick(){
         console.log('onRemoveClick')
@@ -129,16 +179,25 @@
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
-        }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '移除选中，重新拉取数据'
-          })
+        }).then(async() => {
+          let strategies = this.multipleSelection.map((item) => item.identity)
+          console.log(strategies)
+          let res = await deletePurchaseDeal({strategies})
+          if (res.code === 200) {
+            this.$message({
+              type: 'success',
+              message: `移除选中：${strategies.join(',')}成功！`
+            })
+            this.initData()
+          }
         }).catch(() => {
         })
       },
-      onSearch(){
-        console.log('onSearch')
+      formatterRunningStatus(row, column){
+        return runningStatusMap[row.runningStatus]
+      },
+      formatterExpiringStatus(row, column){
+        return expiringStatusMap[row.expiringStatus]
       }
     }
   }

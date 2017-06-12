@@ -17,14 +17,13 @@ const buyingStatusMap = {
 }
 
 const runningStatusMap = {
-  '0': '全部',
-  '1': '启用中',
-  '2': '已停止'
+  '0': '已停止',
+  '1': '启用中'
 }
 
-const expiringStatus = {
+const expiringStatusMap = {
   '0': '全部',
-  '1': '使用中年',
+  '1': '使用中',
   '2': '即将过期',
   '3': '已经过期'
 }
@@ -38,6 +37,6 @@ export {
   trialStatusMap,
   buyingStatusMap,
   runningStatusMap,
-  expiringStatus,
+  expiringStatusMap,
   getResizeHeight
 }

@@ -157,7 +157,7 @@
         if (res.code === 200) {
           this.isAddDialogShow = false
           this.$message({
-            message: `添加策略${this.strategyAddForm.strategyText}成功`,
+            message: `添加策略${this.strategyAddForm.strategyText}成功！`,
             type: 'success'
           })
           this.strategyAddForm.strategyText = ''
@@ -182,8 +182,9 @@
           if (res.code === 200) {
             this.$message({
               type: 'success',
-              message: `试用策略${strategies.join('，')}成功`
+              message: `试用策略${strategies.join('，')}成功！`
             })
+            this.initData()
           }
         }).catch(() => {
         })
@@ -195,7 +196,7 @@
         if (res.code === 200) {
           this.$message({
             type: 'success',
-            message: `删除策略${strategies.join('，')}成功`
+            message: `删除策略${strategies.join(',')}成功！`
           })
           this.initData()
         }
