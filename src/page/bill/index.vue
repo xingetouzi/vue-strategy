@@ -59,14 +59,32 @@
 
 </style>
 <script type="text/babel">
+  import moment from 'moment'
+  import {getPurchaseOrder} from '../../service/getData'
+  import {getResizeHeight} from '../common'
   export default{
     data(){
       return {
         tableData: [],
-        value3: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)]
+        resizeHeight: '600',
+        dateRange: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)]
       }
     },
-    methods: {}
+    mounted () { // 挂载后执行
+      this.initData()
+      this.resizeHeight = getResizeHeight()
+    },
+    methods: {
+      async initData () {
+        let res = await getPurchaseOrder({
+          start: moment(this.dateRange[0]).format('YYYY/MM/DD HH:mm:ss'),
+          end: moment(this.dateRange[1]).format('YYYY/MM/DD HH:mm:ss')
+        })
+        if (res.code === 200) {
+          this.tableData = res.data
+        }
+      }
+    }
   }
 
 </script>

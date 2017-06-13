@@ -20,6 +20,10 @@ let stopPurchaseDeal = params => Request('/business/control/running/stop/').data
 let openAutorenew = params => Request('/business/control/autorenew/start/').data(params).post()
 let closeAutorenew = params => Request('/business/control/autorenew/stop/').data(params).post()
 
+// 账单
+let getPurchaseOrder = params => Request('/business/purchase/order/').data(params).get()
+let getPurchaseOrderDetail = params => Request('/business/purchase/order/' + params.orderId).data().get()
+
 export {
   login,
   logout,
@@ -32,5 +36,7 @@ export {
   startPurchaseDeal,
   stopPurchaseDeal,
   openAutorenew,
-  closeAutorenew
+  closeAutorenew,
+  getPurchaseOrder,
+  getPurchaseOrderDetail
 }
