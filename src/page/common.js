@@ -17,14 +17,14 @@ const buyingStatusMap = {
 }
 
 const runningStatusMap = {
-  '0': '已停止',
-  '1': '启用中'
+  '1': '启用中',
+  '2': '已停止'
 }
 
 const expiringStatusMap = {
   '0': '全部',
   '1': '使用中',
-  '2': '即将过期',
+  '2': '即将到期',
   '3': '已经过期'
 }
 

@@ -14,6 +14,9 @@ Vue.use(Vuex)
 const state = {
   userInfo: {// 用户信息
     isLogin: !!Cookies.get('csrftoken')
+  },
+  shoppingCart: {
+    shoppingList: []
   }
 }
 

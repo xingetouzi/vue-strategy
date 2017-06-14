@@ -29,59 +29,61 @@
         </el-col>
       </el-row>
       <div class="block-20"></div>
-      <el-row>
-        <el-col :span="24">
-          <el-table
-                  ref="shopTable"
-                  :data="tableData"
-                  style="width: 100%"
-                  @selection-change="handleSelectionChange"
-          >
-            <el-table-column
-                    type="selection"
-                    width="55">
-            </el-table-column>
-            <el-table-column
-                    prop="identity"
-                    label="策略ID"
-                    width="150"
+      <div id="common-body">
+        <el-row>
+          <el-col :span="24">
+            <el-table
+                    ref="shopTable"
+                    :data="tableData"
+                    style="width: 100%"
+                    @selection-change="handleSelectionChange"
             >
-            </el-table-column>
-            <el-table-column
-                    prop="name"
-                    label="策略名称"
-                    width="150"
-            >
-            </el-table-column>
-            <el-table-column
-                    prop="runningStatus"
-                    label="运行状态"
-                    :filters="[{ text: '已停止', value: '0' },{ text: '启用中', value: '1' }]"
-                    :filter-method="filterRunningStatus"
-                    filter-placement="bottom-start"
-                    :formatter="formatterRunningStatus"
-            >
-            </el-table-column>
-            <el-table-column
-                    prop="expiringStatus"
-                    label="购买状态"
-                    :filters="[{ text: '可使用', value: '1' }, { text: '试用中', value: '2' },{ text: '即将到期', value: '3' },{ text: '已经到期', value: '4' }]"
-                    :filter-method="filterExpiringStatus"
-                    filter-placement="bottom-start"
-                    :formatter="formatterExpiringStatus"
-            >
-            </el-table-column>
-            <el-table-column
-                    prop="expiredTime"
-                    label="到期时间"
-                    filter-placement="bottom-start">
+              <el-table-column
+                      type="selection"
+                      width="55">
+              </el-table-column>
+              <el-table-column
+                      prop="identity"
+                      label="策略ID"
+                      width="150"
               >
-            </el-table-column>
-          </el-table>
-          <div class="block-20"></div>
-          <div class="shop-selected-text">已选择 <span>{{multipleSelection.length}}</span> 条记录</div>
-        </el-col>
-      </el-row>
+              </el-table-column>
+              <el-table-column
+                      prop="name"
+                      label="策略名称"
+                      width="150"
+              >
+              </el-table-column>
+              <el-table-column
+                      prop="runningStatus"
+                      label="运行状态"
+                      :filters="[{ text: '启用中', value: '1' },{ text: '已停止', value: '2' }]"
+                      :filter-method="filterRunningStatus"
+                      filter-placement="bottom-start"
+                      :formatter="formatterRunningStatus"
+              >
+              </el-table-column>
+              <el-table-column
+                      prop="expiringStatus"
+                      label="购买状态"
+                      :filters="[{ text: '使用中', value: '1' },{ text: '即将到期', value: '2' },{ text: '已经过期', value: '3' }]"
+                      :filter-method="filterExpiringStatus"
+                      filter-placement="bottom-start"
+                      :formatter="formatterExpiringStatus"
+              >
+              </el-table-column>
+              <el-table-column
+                      prop="expiredTime"
+                      label="到期时间"
+                      filter-placement="bottom-start">
+                >
+              </el-table-column>
+            </el-table>
+            <div class="block-20"></div>
+            <div class="shop-selected-text">已选择 <span>{{multipleSelection.length}}</span> 条记录</div>
+          </el-col>
+        </el-row>
+      </div>
     </div>
   </div>
 </template>
@@ -91,6 +93,7 @@
 <script type="text/babel">
   import {getPurchaseDeal, deletePurchaseDeal, stopPurchaseDeal, startPurchaseDeal} from '../../service/getData'
   import {runningStatusMap, expiringStatusMap} from '../common'
+  import {mapMutations} from 'vuex'
   export default{
     data(){
       return {
@@ -107,6 +110,7 @@
       this.initData()
     },
     methods: {
+      ...mapMutations(['UPDATE_SHOPPING_CART']),
       async initData () {
         let res = await getPurchaseDeal({'tsFilter': 0, 'bsFilter': 0})
         if (res.code === 200) {
@@ -170,8 +174,11 @@
       onSearch(){
         console.log('onSearch')
       },
-      onContinueClick(){
-        console.log('onContinueClick,跳转到下单页')
+      onContinueClick(){ // 续费
+        let ids = this.multipleSelection.map((item) => item.identity)
+        console.log('onContinueClick', ids)
+        this.UPDATE_SHOPPING_CART({shoppingList: ids})
+        this.$router.push('bill')
       },
       onRemoveClick(){
         console.log('onRemoveClick')

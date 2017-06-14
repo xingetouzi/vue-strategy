@@ -121,6 +121,7 @@
 <script type="text/babel">
   import {getPurchaseBill, addPurchaseBill, deletePurchaseBill, trialPurchaseBill} from '../../service/getData'
   import {trialStatusMap, buyingStatusMap, getResizeHeight} from '../common'
+  import {mapMutations} from 'vuex'
   export default{
     data(){
       return {
@@ -140,6 +141,7 @@
     },
     computed: {},
     methods: {
+      ...mapMutations(['UPDATE_SHOPPING_CART']),
       async initData () {
         let res = await getPurchaseBill({'tsFilter': 0, 'bsFilter': 0})
         if (res.code === 200) {
@@ -166,7 +168,10 @@
       },
       // 购买策略
       onPurchaseClick(){
-        console.log('onPurchaseClick')
+        let ids = this.multipleSelection.map((item) => item.identity)
+        console.log('onPurchaseClick', ids)
+        this.UPDATE_SHOPPING_CART({shoppingList: ids})
+        this.$router.push('bill')
       },
       // 试用策略
       onTryClick(){

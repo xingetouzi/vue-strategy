@@ -1,7 +1,7 @@
 /**
  * Created by spider on 5/14/17.
  */
-import {GET_USERINFO, SET_USERINFO, LOGOUT} from './mutation_type'
+import {GET_USERINFO, SET_USERINFO, LOGOUT, UPDATE_SHOPPING_CART} from './mutation_type'
 
 export default {
   // 获取用户信息存入vuex
@@ -16,5 +16,8 @@ export default {
   },
   [LOGOUT] (state, info) {
     state.userInfo = Object.assign(state.userInfo, {isLogin: false}, info)
+  },
+  [UPDATE_SHOPPING_CART] (state, list) {
+    state.shoppingCart = Object.assign(state.shoppingCart, list)
   }
 }
