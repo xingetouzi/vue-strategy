@@ -20,7 +20,7 @@
                   :height="resizeHeight"
           >
             <el-table-column
-                    prop="identity"
+                    prop="id"
                     label="策略ID"
                     width="150"
             >
@@ -37,12 +37,12 @@
             >
             </el-table-column>
             <el-table-column
-                    prop="expiringStatus"
+                    prop="time"
                     label="使用期"
             >
             </el-table-column>
-              <el-table-column
-                    prop="expiringStatus"
+            <el-table-column
+                    prop="paid"
                     label="费用"
             >
             </el-table-column>
@@ -55,9 +55,33 @@
 <style>
 
 </style>
-<script>
-    export default{
-
+<script type="text/babel">
+  import {mapState} from 'vuex'
+  import {getPurchaseDealInfo} from '../../service/getData'
+  export default{
+    data(){
+      return {
+        tableData: [],
+        resizeHeight: 600
+      }
+    },
+    computed: {
+      ...mapState([
+        'shoppingCart'
+      ])
+    },
+    mounted () { // 挂载后执行
+      this.initData()
+    },
+    methods: {
+      async initData () {
+        console.log(this.shoppingCart, this.$route.query)
+        let {shoppingList} = this.$route.query
+        let res = await getPurchaseDealInfo({shoppingList})
+        if (res.code === 200) {
+          this.tableData = res.data
+        }
+      }
     }
-
+  }
 </script>
