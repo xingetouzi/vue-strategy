@@ -170,8 +170,8 @@
       onPurchaseClick(){
         let ids = this.multipleSelection.map((item) => item.identity)
         console.log('onPurchaseClick', ids)
-        this.UPDATE_SHOPPING_CART({shoppingList: ids})
-        this.$router.push({path: 'order', query: {shoppingList: ids}})
+        this.UPDATE_SHOPPING_CART({strategies: ids})
+        this.$router.push({path: 'order', query: {strategies: ids}})
       },
       // 试用策略
       onTryClick(){

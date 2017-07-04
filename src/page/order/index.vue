@@ -57,7 +57,7 @@
 </style>
 <script type="text/babel">
   import {mapState} from 'vuex'
-  import {getPurchaseDealInfo} from '../../service/getData'
+  import {getPurchaseDealDetail} from '../../service/getData'
   export default{
     data(){
       return {
@@ -76,8 +76,9 @@
     methods: {
       async initData () {
         console.log(this.shoppingCart, this.$route.query)
-        let {shoppingList} = this.$route.query
-        let res = await getPurchaseDealInfo({shoppingList})
+        let {strategies} = this.$route.query
+        console.log(strategies)
+        let res = await getPurchaseDealDetail({strategies})
         if (res.code === 200) {
           this.tableData = res.data
         }

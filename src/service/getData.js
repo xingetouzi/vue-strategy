@@ -25,7 +25,7 @@ let getPurchaseOrder = params => Request('/business/purchase/order/').data(param
 let getPurchaseOrderDetail = params => Request('/business/purchase/order/' + params.orderId).data().get()
 
 // 下单
-let getPurchaseDealInfo = params => Request('/business/purchase/get_price/').data(params).get()
+let getPurchaseDealDetail = params => Request('/business/purchase/strategy/').data(params).get()
 let putPurchaseDeal = params => Request('/business/purchase/deal/').data(params).get()
 
 export {
@@ -43,6 +43,6 @@ export {
   closeAutorenew,
   getPurchaseOrder,
   getPurchaseOrderDetail,
-  getPurchaseDealInfo,
+  getPurchaseDealDetail,
   putPurchaseDeal
 }
