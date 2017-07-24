@@ -45,8 +45,8 @@
 </style>
 
 <script type="text/babel">
-  import {login} from '../../service/getData'
-  import {mapMutations} from 'vuex'
+  import {login} from '../../service/getData';
+  import {mapMutations} from 'vuex';
   export default {
     data() {
       return {
@@ -54,29 +54,29 @@
           username: '',
           password: ''
         }
-      }
+      };
     },
     methods: {
       ...mapMutations(['SET_USERINFO']),
       submit(formName) {
         this.$refs[formName].validate(async(valid) => {
           if (valid) {
-            let res = await login(this.loginForm)
-            console.log(res)
+            let res = await login(this.loginForm);
+            console.log(res);
             if (res.data.success === 1) {
-              this.SET_USERINFO({userName: res.message})
-              this.$router.push('shop')
+              this.SET_USERINFO({userName: res.message});
+              this.$router.push('shop');
             }
           } else {
-            console.log('error submit!!')
-            return false
+            console.log('error submit!!');
+            return false;
           }
-        })
+        });
       },
       reset(formName) {
-        this.$refs[formName].resetFields()
+        this.$refs[formName].resetFields();
       }
     }
-  }
+  };
 
 </script>

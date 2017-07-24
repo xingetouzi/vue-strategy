@@ -91,9 +91,9 @@
 
 </style>
 <script type="text/babel">
-  import {getPurchaseDeal, deletePurchaseDeal, stopPurchaseDeal, startPurchaseDeal} from '../../service/getData'
-  import {runningStatusMap, expiringStatusMap} from '../common'
-  import {mapMutations} from 'vuex'
+  import {getPurchaseDeal, deletePurchaseDeal, stopPurchaseDeal, startPurchaseDeal} from '../../service/getData';
+  import {runningStatusMap, expiringStatusMap} from '../common';
+  import {mapMutations} from 'vuex';
   export default{
     data(){
       return {
@@ -104,109 +104,109 @@
           strategyText: ''
         },
         multipleSelection: [] // 多选
-      }
+      };
     },
     mounted(){
-      this.initData()
+      this.initData();
     },
     methods: {
       ...mapMutations(['UPDATE_SHOPPING_CART']),
       async initData () {
-        let res = await getPurchaseDeal({'tsFilter': 0, 'bsFilter': 0})
+        let res = await getPurchaseDeal({'tsFilter': 0, 'bsFilter': 0});
         if (res.code === 200) {
-          this.tableData = res.data
+          this.tableData = res.data;
         }
       },
       filterExpiringStatus(value, row){
-        return row.expiringStatus + '' === value
+        return row.expiringStatus + '' === value;
       },
       filterRunningStatus(value, row){
-        return row.runningStatus + '' === value
+        return row.runningStatus + '' === value;
       },
       handleSelectionChange(val) {
-        this.multipleSelection = val
-        console.log(this.multipleSelection)
+        this.multipleSelection = val;
+        console.log(this.multipleSelection);
       },
       onStartClick(){
-        console.log('onStartClick')
-        let strategies = this.multipleSelection.map((item) => item.identity)
+        console.log('onStartClick');
+        let strategies = this.multipleSelection.map((item) => item.identity);
         this.$confirm(`是否确认启用策略${strategies.join(',')}？`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(async() => {
-          let strategies = this.multipleSelection.map((item) => item.identity)
-          console.log(strategies)
-          let res = await startPurchaseDeal({strategies})
+          let strategies = this.multipleSelection.map((item) => item.identity);
+          console.log(strategies);
+          let res = await startPurchaseDeal({strategies});
           if (res.code === 200) {
             this.$message({
               type: 'success',
               message: `启用策略${strategies.join(',')}成功！`
-            })
-            this.initData()
+            });
+            this.initData();
           }
         }).catch(() => {
 
-        })
+        });
       },
       onStopClick(){
-        console.log('onStopClick')
-        let strategies = this.multipleSelection.map((item) => item.identity)
+        console.log('onStopClick');
+        let strategies = this.multipleSelection.map((item) => item.identity);
         this.$confirm(`是否确认停止策略${strategies.join(',')}？`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(async() => {
-          let strategies = this.multipleSelection.map((item) => item.identity)
-          console.log(strategies)
-          let res = await stopPurchaseDeal({strategies})
+          let strategies = this.multipleSelection.map((item) => item.identity);
+          console.log(strategies);
+          let res = await stopPurchaseDeal({strategies});
           if (res.code === 200) {
             this.$message({
               type: 'success',
               message: `停止策略${strategies.join(',')}成功！`
-            })
-            this.initData()
+            });
+            this.initData();
           }
         }).catch(() => {
 
-        })
+        });
       },
       onSearch(){
-        console.log('onSearch')
+        console.log('onSearch');
       },
       onContinueClick(){ // 续费
-        let ids = this.multipleSelection.map((item) => item.identity)
-        console.log('onContinueClick', ids)
-        this.UPDATE_SHOPPING_CART({shoppingList: ids})
-        this.$router.push('bill')
+        let ids = this.multipleSelection.map((item) => item.identity);
+        console.log('onContinueClick', ids);
+        this.UPDATE_SHOPPING_CART({shoppingList: ids});
+        this.$router.push('bill');
       },
       onRemoveClick(){
-        console.log('onRemoveClick')
+        console.log('onRemoveClick');
         this.$confirm('移除后，尚未到期策略的可使用时长将清零，是否确认？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(async() => {
-          let strategies = this.multipleSelection.map((item) => item.identity)
-          console.log(strategies)
-          let res = await deletePurchaseDeal({strategies})
+          let strategies = this.multipleSelection.map((item) => item.identity);
+          console.log(strategies);
+          let res = await deletePurchaseDeal({strategies});
           if (res.code === 200) {
             this.$message({
               type: 'success',
               message: `移除选中：${strategies.join(',')}成功！`
-            })
-            this.initData()
+            });
+            this.initData();
           }
         }).catch(() => {
-        })
+        });
       },
       formatterRunningStatus(row, column){
-        return runningStatusMap[row.runningStatus]
+        return runningStatusMap[row.runningStatus];
       },
       formatterExpiringStatus(row, column){
-        return expiringStatusMap[row.expiringStatus]
+        return expiringStatusMap[row.expiringStatus];
       }
     }
-  }
+  };
 
 </script>

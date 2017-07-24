@@ -18,10 +18,10 @@
 </template>
 
 <script type="text/babel">
-  import {mapState, mapActions} from 'vuex'
+  import {mapState, mapActions} from 'vuex';
   export default{
     data () {
-      return {}
+      return {};
     },
     computed: mapState([
       'userInfo'
@@ -31,11 +31,11 @@
         'logout' // 映射 this.increment() 为 this.$store.dispatch('increment')
       ]),
       onLogout(){
-        this.logout()
-        this.$router.push('shop')
+        this.logout();
+        this.$router.push('shop');
       }
     }
-  }
+  };
 
 </script>
 

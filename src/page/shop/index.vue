@@ -119,9 +119,9 @@
   }
 </style>
 <script type="text/babel">
-  import {getPurchaseBill, addPurchaseBill, deletePurchaseBill, trialPurchaseBill} from '../../service/getData'
-  import {trialStatusMap, buyingStatusMap, getResizeHeight} from '../common'
-  import {mapMutations} from 'vuex'
+  import {getPurchaseBill, addPurchaseBill, deletePurchaseBill, trialPurchaseBill} from '../../service/getData';
+  import {trialStatusMap, buyingStatusMap, getResizeHeight} from '../common';
+  import {mapMutations} from 'vuex';
   export default{
     data(){
       return {
@@ -133,96 +133,96 @@
           strategyText: ''
         },
         multipleSelection: [] // 多选
-      }
+      };
     },
     mounted () { // 挂载后执行
-      this.initData()
-      this.resizeHeight = getResizeHeight()
+      this.initData();
+      this.resizeHeight = getResizeHeight();
     },
     computed: {},
     methods: {
       ...mapMutations(['UPDATE_SHOPPING_CART']),
       async initData () {
-        let res = await getPurchaseBill({'tsFilter': 0, 'bsFilter': 0})
+        let res = await getPurchaseBill({'tsFilter': 0, 'bsFilter': 0});
         if (res.code === 200) {
-          this.tableData = res.data
+          this.tableData = res.data;
         }
       },
       onSearch(){
-        console.log('onSearch', this.searchText)
+        console.log('onSearch', this.searchText);
       },
       // 添加策略
       async onAddDialogConfirm(){
-        let strategies = this.strategyAddForm.strategyText.split('，')
-        console.log('onAddDialogConfirm', strategies)
-        let res = await addPurchaseBill({strategies})
+        let strategies = this.strategyAddForm.strategyText.split('，');
+        console.log('onAddDialogConfirm', strategies);
+        let res = await addPurchaseBill({strategies});
         if (res.code === 200) {
-          this.isAddDialogShow = false
+          this.isAddDialogShow = false;
           this.$message({
             message: `添加策略${this.strategyAddForm.strategyText}成功！`,
             type: 'success'
-          })
-          this.strategyAddForm.strategyText = ''
-          this.initData()
+          });
+          this.strategyAddForm.strategyText = '';
+          this.initData();
         }
       },
       // 购买策略
       onPurchaseClick(){
-        let ids = this.multipleSelection.map((item) => item.identity)
-        console.log('onPurchaseClick', ids)
-        this.UPDATE_SHOPPING_CART({strategies: ids})
-        this.$router.push({path: 'order', query: {strategies: ids}})
+        let ids = this.multipleSelection.map((item) => item.identity);
+        console.log('onPurchaseClick', ids);
+        this.UPDATE_SHOPPING_CART({strategies: ids});
+        this.$router.push({path: 'order', query: {strategies: ids}});
       },
       // 试用策略
       onTryClick(){
-        console.log('onTryClick')
+        console.log('onTryClick');
         this.$confirm('选中且尚未试用的策略将进入试用期计时，之后您可以在控制台中查看并启动该策略，是否确认？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(async() => {
-          let strategies = this.multipleSelection.map((item) => item.identity)
-          console.log('onTryClick', strategies)
-          let res = await trialPurchaseBill({strategies})
+          let strategies = this.multipleSelection.map((item) => item.identity);
+          console.log('onTryClick', strategies);
+          let res = await trialPurchaseBill({strategies});
           if (res.code === 200) {
             this.$message({
               type: 'success',
               message: `试用策略${strategies.join('，')}成功！`
-            })
-            this.initData()
+            });
+            this.initData();
           }
         }).catch(() => {
-        })
+        });
       },
       async onDeleteClick(){
-        let strategies = this.multipleSelection.map((item) => item.identity)
-        console.log('onDeleteClick', strategies)
-        let res = await deletePurchaseBill({strategies})
+        let strategies = this.multipleSelection.map((item) => item.identity);
+        console.log('onDeleteClick', strategies);
+        let res = await deletePurchaseBill({strategies});
         if (res.code === 200) {
           this.$message({
             type: 'success',
             message: `删除策略${strategies.join(',')}成功！`
-          })
-          this.initData()
+          });
+          this.initData();
         }
       },
       filterTrialStatus(value, row){
-        return row.trialStatus + '' === value
+        return row.trialStatus + '' === value;
       },
       filterBuyingStatus(value, row){
-        return row.buyingStatus + '' === value
+        return row.buyingStatus + '' === value;
       },
       formatterTrialStatus(row, column){
-        return trialStatusMap[row.trialStatus]
+        return trialStatusMap[row.trialStatus];
       },
       formatterBuyingStatus(row, column){
-        return buyingStatusMap[row.buyingStatus]
+        return buyingStatusMap[row.buyingStatus];
       },
       handleSelectionChange(val) {
-        this.multipleSelection = val
-        console.log(this.multipleSelection)
+        this.multipleSelection = val;
+        console.log(this.multipleSelection);
       }
     }
-  }
+  };
 
 </script>

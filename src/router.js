@@ -1,14 +1,14 @@
 /**
  * Created by spider on 4/16/17.
  */
-import App from './App.vue'
+import App from './App.vue';
 
-const Login = r => require.ensure([], () => r(require('./page/login/index')), 'login')
-const Home = r => require.ensure([], () => r(require('./page/home/index')), 'home')
-const Bill = r => require.ensure([], () => r(require('./page/bill/index')), 'bill')
-const Console = r => require.ensure([], () => r(require('./page/console/index')), 'console')
-const Order = r => require.ensure([], () => r(require('./page/order/index')), 'order')
-const Shop = r => require.ensure([], () => r(require('./page/shop/index')), 'shop')
+const Login = r => require.ensure([], () => r(require('./page/login/index')), 'login');
+const Home = r => require.ensure([], () => r(require('./page/home/index')), 'home');
+const Bill = r => require.ensure([], () => r(require('./page/bill/index')), 'bill');
+const Console = r => require.ensure([], () => r(require('./page/console/index')), 'console');
+const Order = r => require.ensure([], () => r(require('./page/order/index')), 'order');
+const Shop = r => require.ensure([], () => r(require('./page/shop/index')), 'shop');
 
 const routes = [{
   path: '/',
@@ -37,6 +37,6 @@ const routes = [{
       component: Shop
     }
   ]
-}]
+}];
 
-export default routes
+export default routes;

@@ -1,23 +1,23 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 // let VueResource = require('vue-resource')
-import routes from './router'
-import store from './store/index'
-import Element from 'element-ui'
-import '../theme/index.css'
-import './css/common.scss'
-import './css/normalize.css'
+import routes from './router';
+import store from './store/index';
+import Element from 'element-ui';
+import '../theme/index.css';
+import './css/common.scss';
+import './css/normalize.css';
 
 // 社区贡献了一个插件 vue-resource，提供一种容易的方式与 RESTful APIs 配合。
 // Vue.use(VueResource)
-Vue.use(Element)
-Vue.use(VueRouter)
+Vue.use(Element);
+Vue.use(VueRouter);
 
 const router = new VueRouter({
   routes,
   mode: 'hash',
   strict: process.env.NODE_ENV !== 'production'
-})
+});
 
 // 页面刷新时，重新赋值token
 /*
@@ -46,4 +46,4 @@ router.beforeEach((to, from, next) => {
 new Vue({
   router,
   store
-}).$mount('#app')
+}).$mount('#app');

@@ -14,12 +14,12 @@
 </style>
 
 <script type="text/babel">
-  import {mapState, mapMutations, mapActions} from 'vuex'
-  import headTop from './components/header'
-  import leftMenu from './components/leftMenu.vue'
+  import {mapState, mapMutations, mapActions} from 'vuex';
+  import headTop from './components/header';
+  import leftMenu from './components/leftMenu.vue';
   export default {
     data(){
-      return {}
+      return {};
     },
     components: {
       headTop,
@@ -40,5 +40,5 @@
         'userInfo'
       ])
     }
-  }
+  };
 </script>

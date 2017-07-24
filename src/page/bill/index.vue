@@ -65,9 +65,9 @@
 
 </style>
 <script type="text/babel">
-  import moment from 'moment'
-  import {getPurchaseOrder} from '../../service/getData'
-  import {getResizeHeight} from '../common'
+  import moment from 'moment';
+  import {getPurchaseOrder} from '../../service/getData';
+  import {getResizeHeight} from '../common';
   export default{
     data(){
       return {
@@ -78,39 +78,39 @@
           shortcuts: [{
             text: '最近一周',
             onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-              picker.$emit('pick', [start, end])
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', [start, end]);
             }
           }, {
             text: '最近一个月',
             onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-              picker.$emit('pick', [start, end])
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+              picker.$emit('pick', [start, end]);
             }
           }, {
             text: '最近六个月',
             onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90 * 6)
-              picker.$emit('pick', [start, end])
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90 * 6);
+              picker.$emit('pick', [start, end]);
             }
           }]
         }
-      }
+      };
     },
     mounted () { // 挂载后执行
-      this.initData()
-      this.resizeHeight = getResizeHeight()
+      this.initData();
+      this.resizeHeight = getResizeHeight();
     },
     watch: {
       dateRange: function () {
-        console.log('dateRange')
-        this.initData()
+        console.log('dateRange');
+        this.initData();
       }
     },
     methods: {
@@ -118,12 +118,12 @@
         let res = await getPurchaseOrder({
           start: moment(this.dateRange[0]).format('YYYY/MM/DD HH:mm:ss'),
           end: moment(this.dateRange[1]).format('YYYY/MM/DD HH:mm:ss')
-        })
+        });
         if (res.code === 200) {
-          this.tableData = res.data
+          this.tableData = res.data;
         }
       }
     }
-  }
+  };
 
 </script>

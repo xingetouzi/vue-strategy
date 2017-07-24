@@ -56,14 +56,14 @@
 
 </style>
 <script type="text/babel">
-  import {mapState} from 'vuex'
-  import {getPurchaseDealDetail} from '../../service/getData'
+  import {mapState} from 'vuex';
+  import {getPurchaseDealDetail} from '../../service/getData';
   export default{
     data(){
       return {
         tableData: [],
         resizeHeight: 600
-      }
+      };
     },
     computed: {
       ...mapState([
@@ -71,18 +71,18 @@
       ])
     },
     mounted () { // 挂载后执行
-      this.initData()
+      this.initData();
     },
     methods: {
       async initData () {
-        console.log(this.shoppingCart, this.$route.query)
-        let {strategies} = this.$route.query
-        console.log(strategies)
-        let res = await getPurchaseDealDetail({strategies})
+        console.log(this.shoppingCart, this.$route.query);
+        let {strategies} = this.$route.query;
+        console.log(strategies);
+        let res = await getPurchaseDealDetail({strategies});
         if (res.code === 200) {
-          this.tableData = res.data
+          this.tableData = res.data;
         }
       }
     }
-  }
+  };
 </script>
